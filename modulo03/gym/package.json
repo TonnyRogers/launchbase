@@ -1,13 +1,16 @@
 {
-  "name": "back-end",
+  "name": "gym",
   "version": "1.0.0",
+  "description": "",
+  "main": "instructos.js",
   "scripts": {
     "start": "npm-run-all -p nodemon browser",
     "nodemon": "nodemon server.js",
     "browser": "browser-sync start --proxy http://localhost:5000 --files 'public,views' "
   },
-  "main": "index.js",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "nunjucks": "^3.2.1"
