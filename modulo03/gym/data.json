@@ -1,10 +1,10 @@
 {
   "instructors": [
     {
-      "id": "1",
+      "id": 1,
       "avatar_url": "https://lh3.googleusercontent.com/vXItyiOIR9qQBADdOI-WDGTGe8PT1NouK9VxRgJsTh2OELoRaWaS72-grMFb4edw8MAYPzdIIZM_WrR77wmpsx8yrEhxI4EXH_Y1FO4eTPELdw370tCvo3LfLRbR0zTHUmYMY2Wi8Hemfw-4ijXldMgQ7I8zxKOX_ydKkip5ybpLViYw9UVDh__J54xEEjhLmq3bphF9vK02QAbtY0I3CpWPx7ubIIsdshx1qc5xwdRFqe1viqy8hNtFSrPKwBndlcwuRCAIBOSxloYxYgkksbPvx4-0NqHlu30STy_j-_f7Ow5HcLBpMZFJtRoaAYPAiu1UPgnCH4nO_NY28oFh0sFPfu8SFccd80s4c41Kiu0xTGlifQqfT4Z-iZIHsRm5EFfBz86P0V7ylJPaWRwkhQ8b3KtbJ0DwLlX7UB8cMfLVRklrA2uRcFVseHUHEI1Chr-3sQpEX4geWcN4IQ35csApAsUOvsCweJINHS6g1GEOi1KcJ3fjNlX4pnPojNHp9qb6AVXHalgDkZmPwNsJRRU9gLVkA0Kfcet-IEAdrrw-0IYvbp_qsMhnMpdDAjVDIvcWtfcU6wJ_XQrytKPDaZ9gzqmUiE-6qcz5yLe_su1Y5-dz0jLi-NehjMMuyQo9SeQeRfERZPUSer4a4w0IPjiP_8Bd5aFkb91-Rqlywps_E8TIwlQCUQKORw391w=w1007-h671-no",
       "birth": 797731200000,
-      "name": "Antoniel Carlos Amaral",
+      "name": "Antoniel Carlos Amaral 2",
       "services": "musculação, crossfit, zumba",
       "gender": "M",
       "created_at": 1587774037334
@@ -35,33 +35,30 @@
       "services": "comer, dormir, deitar",
       "gender": "F",
       "created_at": 1587774251440
-    },
+    }
+  ],
+  "members": [
     {
-      "id": 5,
-      "avatar_url": "https://lh3.googleusercontent.com/vXItyiOIR9qQBADdOI-WDGTGe8PT1NouK9VxRgJsTh2OELoRaWaS72-grMFb4edw8MAYPzdIIZM_WrR77wmpsx8yrEhxI4EXH_Y1FO4eTPELdw370tCvo3LfLRbR0zTHUmYMY2Wi8Hemfw-4ijXldMgQ7I8zxKOX_ydKkip5ybpLViYw9UVDh__J54xEEjhLmq3bphF9vK02QAbtY0I3CpWPx7ubIIsdshx1qc5xwdRFqe1viqy8hNtFSrPKwBndlcwuRCAIBOSxloYxYgkksbPvx4-0NqHlu30STy_j-_f7Ow5HcLBpMZFJtRoaAYPAiu1UPgnCH4nO_NY28oFh0sFPfu8SFccd80s4c41Kiu0xTGlifQqfT4Z-iZIHsRm5EFfBz86P0V7ylJPaWRwkhQ8b3KtbJ0DwLlX7UB8cMfLVRklrA2uRcFVseHUHEI1Chr-3sQpEX4geWcN4IQ35csApAsUOvsCweJINHS6g1GEOi1KcJ3fjNlX4pnPojNHp9qb6AVXHalgDkZmPwNsJRRU9gLVkA0Kfcet-IEAdrrw-0IYvbp_qsMhnMpdDAjVDIvcWtfcU6wJ_XQrytKPDaZ9gzqmUiE-6qcz5yLe_su1Y5-dz0jLi-NehjMMuyQo9SeQeRfERZPUSer4a4w0IPjiP_8Bd5aFkb91-Rqlywps_E8TIwlQCUQKORw391w=w1007-h671-no",
-      "birth": 895017600000,
-      "name": "Leticia",
-      "services": "musculação, crossfit, zumba",
+      "id": 1,
+      "avatar_url": "https://image.freepik.com/free-photo/woman-gym-body-building_1303-5524.jpg",
+      "name": "Jeniffer",
+      "email": "jeniffer@milgrau.com",
+      "birth": 826934400000,
       "gender": "F",
-      "created_at": 1587786267741
+      "blood": "B1",
+      "weight": "60",
+      "height": "163"
     },
     {
-      "id": 6,
-      "avatar_url": "https://google.com.br",
-      "birth": -10970380800000,
-      "name": "Tonyel",
-      "services": "comer, dormir, deitar",
+      "id": 2,
+      "avatar_url": "https://vs.media/resize?compression=8&quality=65&url=http%3A%2F%2Fimg.vs.media%2F1571003764704-sheviii2k.png&width=320",
+      "name": "Sheviii",
+      "email": "sheviii@sheviii2k.com.br",
+      "birth": 431481600000,
       "gender": "M",
-      "created_at": 1587786548919
-    },
-    {
-      "id": 7,
-      "avatar_url": "https://google.com.br",
-      "birth": -10970380800000,
-      "name": "Tonyel",
-      "services": "comer, dormir, deitar",
-      "gender": "M",
-      "created_at": 1587786589135
+      "blood": "B1",
+      "weight": "90",
+      "height": "170"
     }
   ]
 }

@@ -1,0 +1,54 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Detalhes do Membro</title>
+{% endblock head %}
+
+{% block content %}
+    <div class="card">
+        <section class="avatar" style="background: url('{{ data.avatar_url }}') no-repeat center center / cover;">
+        
+        </section>
+        <section class="details">
+            <h3>Detalhes</h3>
+
+            <div class="item">
+                <div>Nome</div>
+                <div>{{ data.name }}</div>
+            </div>
+
+            <div class="item">
+                <div>Email</div>
+                <div>{{ data.email }}</div>
+            </div>
+
+            <div class="item">
+                <div>Aniversário</div>
+                <div>{{ data.birth }}</div>
+            </div>
+ 
+            <div class="item">
+                <div>Sexo</div>
+                <div>{{ "Masculino" if data.gender == 'M' else "Feminino" }}</div>
+            </div>
+
+            <div class="item">
+                <div>Tipo Sanguineio</div>
+                <div>{{ data.blood }}</div>
+            </div>
+
+            <div class="item">
+                <div>Peso</div>
+                <div>{{ data.weight }} Kg</div>
+            </div>
+
+            <div class="item">
+                <div>Altura</div>
+                <div>{{ data.height }} cm</div>
+            </div>
+
+            <a href="/members/{{data.id}}/edit" class="button">Editar</a>
+            
+        </section>
+    </div>
+{% endblock content %}
