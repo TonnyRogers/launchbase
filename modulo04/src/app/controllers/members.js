@@ -1,78 +1,88 @@
 const { age, date } = require('../../lib/utils')
+const Member = require('../models/member')
 
 module.exports = {
     index(req,res){
-        return res.render('members/index', { members: data.members } );
+        Member.all(function(members){
+            return res.render('members/index', { members } );
+        })
+        
     },
     create(req,res){
-        return res.render('members/create');
+        Member.instructorsSelectOptions(function(instructorList){
+            return res.render('members/create', { instructors: instructorList });
+        })
+        
     },
     store(req,res){ 
-        // const keys = Object.keys(req.body)
+
+        const keys = Object.keys(req.body)
     
-        // for( key of keys){
-        //     if( req.body[key] == "" ){
-        //         return res.send("Please fill all fields")
-        //     }
-        // }
-    
-        // birth = Date.parse(req.body.birth)
-    
-        // const lastMember = data.members[data.members.length - 1]
-    
-        // let id = lastMember ? lastMember.id + 1 : 1
+        for( key of keys){
+            if( req.body[key] == "" ){
+                return res.send("Please fill all fields")
+            }
+        }
+
+        Member.create(req,function(member){
+            return res.redirect(`/members/${member.id}`)
+        })
         
-        return res.redirect(`/members`)
     },
     show(req,res) {
-        // const { id } = req.params
-       
-        // let isPositive = memberFind.blood.slice(-1);
+        const { id } = req.params
+
+        Member.find(id, function(member){
+
+            let isPositive = member.blood.slice(-1);
         
-        // const member = {
-        //     ...memberFind,
-        //     age: age(memberFind.birth),
-        //     birth: date(memberFind.birth).birthDay,
-        //     blood: isPositive == '1' ? memberFind.blood.replace(isPositive,'+') : memberFind.blood.replace(isPositive,'-')
-        // }
-    
-    
-        return res.render('members/show')
+            member = {
+                ...member,
+                age: age(member.birth),
+                birth: date(member.birth).birthDay,
+                blood: isPositive == '1' ? member.blood.replace(isPositive,'+') : member.blood.replace(isPositive,'-')
+            }
+
+            return res.render('members/show', { data: member })
+        })
+       
     },
     edit(req,res) {
-        // const { id } = req.params
-    
-        // const member = {
-        //     ...memberFind,
-        //     birth: date(memberFind.birth).iso
-        // }
+        const { id } = req.params
+        let instructors = []
+
+        Member.instructorsSelectOptions(function(instructorList){
+            instructors = instructorList
+            return
+        })
+
+        Member.find(id, function(member){
+
+            let isPositive = member.blood.slice(-1);
         
-        return res.render('members/edit')
+            member = {
+                ...member,
+                birth: date(member.birth).iso,
+            }
+
+            return res.render('members/edit', { member, instructors })
+        })
+        
     },
     update(req,res) {
-        // const { id } = req.body
-        // let index = 0 
-    
-        // const member = {
-        //     ...memberFind,
-        //     ...req.body,
-        //     birth: Date.parse(req.body.birth),
-        //     id: Number(req.body.id)
-        // }
-    
-        return res.redirect(`/members/${id}`)
+        const { id } = req.body
+
+        Member.update(id,req,function(member){
+            return res.redirect(`/members/${member.id}`)
+        })
+        
     },
     destroy(req,res) {
         const { id } = req.body
-    
-        try {
-    
+
+        Member.destroy(id,function(){
             return res.redirect('/members')
-        } catch (error) {
-            return res.send({ message: error })
-        }
-        
-    
+        })   
         
     }
 

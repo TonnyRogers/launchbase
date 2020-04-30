@@ -3,8 +3,14 @@ const { age, date } = require('../../lib/utils')
 
 module.exports = {
     all(callback){
-        db.query(`SELECT * FROM instructors`, function(err, result){
-            if(err) return res.send({ message: 'Database Error', error: err })
+        db.query(`
+            SELECT instructors.*, count(members.*) AS total_students
+            FROM instructors
+            LEFT JOIN members ON (instructors.id = members.instructor_id)
+            GROUP BY instructors.id
+            ORDER BY name ASC
+            `, function(err, result){
+            if(err) throw `Database Error! ${err}`
             
             callback(result.rows)
         })
@@ -36,7 +42,7 @@ module.exports = {
         ]
 
         db.query(query, values, function(err, result){
-            if(err) return res.send({ message: 'Database Error', error: err })
+            if(err) throw `Database Error! ${err}`
 
             callback(result.rows[0])
         })
@@ -44,7 +50,7 @@ module.exports = {
     },
     find(id, callback){
         db.query(`SELECT * FROM instructors WHERE id = $1`,[id] , function(err, result){
-            if(err) return res.send({ message: 'Database Error', error: err })
+            if(err) throw `Database Error! ${err}`
             
             callback(result.rows[0])
         })
@@ -56,11 +62,11 @@ module.exports = {
         const query = `
             UPDATE instructors
             SET
-            avatar_url = $1,
-            name = $2,
-            birth = $3,
-            gender = $4,
-            services = $5
+            avatar_url =($1),
+            name =($2),
+            birth =($3),
+            gender =($4),
+            services =($5)
             WHERE id = $6
             RETURNING *
         `
@@ -75,12 +81,33 @@ module.exports = {
         ]
 
         db.query(query,values,function(err, result){
-            // if(err) return res.send({ message: 'Database Error', error: err })
+            if(err) throw `Database Error! ${err}`
             console.log("ERROR: ", err)
             console.log("RETURN: ", result)
             
             callback(result.rows[0])
         })
-    }
+    },
+    destroy(id,callback){
+        db.query('DELETE FROM instructors WHERE id = $1', [id], function(err,result){
+            if(err) throw `Database Error! ${err}`
+
+            return callback()
+        })
+    },
+    findBy(filter, callback){
+        db.query(`
+            SELECT instructors.*, count(members.*) AS total_students
+            FROM instructors
+            LEFT JOIN members ON (instructors.id = members.instructor_id)
+            WHERE instructors.name ILIKE '%${filter}%' OR
+            instructors.services ILIKE '%${filter}%'
+            GROUP BY instructors.id
+            ORDER BY name ASC`,function(err, result){
+            if(err) throw `Database Error! ${err}`
+            
+            callback(result.rows)
+        })
+    },
 
 }

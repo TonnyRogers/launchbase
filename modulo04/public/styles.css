@@ -245,7 +245,7 @@ tbody tr td:last-child a,
     border-radius: 4px;
 }
 
-.table-container > a {
+/* .table-container > a {
     margin-bottom: 32px;
     display: inline-block;
     position: absolute;
@@ -253,9 +253,38 @@ tbody tr td:last-child a,
     background-color: var(--secondary-color);
     color: #555;
     font-weight: bold;
-}
+} */
 
 .table-container thead tr th:last-child,
 td:last-child {
     text-align: center;
+}
+
+/* Filter */
+
+.table-container .header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 32px;
+}
+.table-container .header a {
+    margin: 0;
+    width: 120px;
+}
+
+.table-container .header form {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    align-items: center;
+    grid-gap: 8px;
+}
+
+.table-container .header form button {
+    margin: 0;
+}
+
+.table-container .header form input {
+    border: 1px solid #eee;
+    padding: 4px 8px;
 }

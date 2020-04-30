@@ -13,14 +13,12 @@
         <section class="details">
             <form class="" method="POST" action="/instructors?_method=PUT">
                 <h3>Editar</h3>
-
-                {% include 'instructors/fields.njk' %}
-
                 <input type="hidden" name="id" value="{{ instructor.id }}">
-
+                {% include 'instructors/fields.njk' %}
             </form>
 
             <form id="form-delete" action="/instructors?_method=DELETE" method="POST">
+                <input type="hidden" name="id" value="{{ instructor.id }}">
                 <button  type="submit">Deletar</button>
             </form>
         </section>

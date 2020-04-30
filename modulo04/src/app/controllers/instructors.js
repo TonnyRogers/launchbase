@@ -4,12 +4,21 @@ const Instructor = require('../models/instructor')
 module.exports  = {
 
     index(req,res){
+        const { filter } = req.query
 
-        Instructor.all(function(instructors){
+        if( filter ){
+            Instructor.findBy(filter,function(instructors){
+                return res.render('instructors/index', { instructors, filter })
+            })
+        }else{
+            Instructor.all(function(instructors){
 
-            return res.render('instructors/index', { instructors })
+                return res.render('instructors/index', { instructors })
+    
+            })
+        }
 
-        })
+        
        
     },
     create(req,res){
@@ -69,21 +78,18 @@ module.exports  = {
 
             if(!instructor) return res.send({ message: 'Instructor Not Found' })
 
-            return res.redirect(`../instructors/${instructor.id}`)
+            return res.redirect(`/instructors/${instructor.id}`)
         })
     },
     destroy(req,res) {
         const { id } = req.body
+
+        console.log('ID ',req.body);
     
-        try {
-    
-            return res.send({message: 'Instructor deleted '})
-        } catch (error) {
-            return res.send({message: error })
-        }
-        
-    
-        
+       Instructor.destroy(id,function(){
+            return res.redirect('/instructors')
+       })
+
     }
 
 }
