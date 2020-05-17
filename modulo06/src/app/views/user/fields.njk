@@ -30,7 +30,6 @@
             type="password" 
             name="password" 
             placeholder="Digite sua senha"
-            value="{{ user.password }}"
         >
     </div>
 </div>
@@ -59,6 +58,7 @@
             placeholder="Digite seu documento"
             value="{{ user.cpf_cnpj }}"
             onkeydown="Mask.apply(this, 'cpfCnpj')"
+            onblur="Validate.apply(this, 'isCpfCnpj')"
         >
     </div>
 </div>
@@ -72,6 +72,7 @@
             placeholder="Digite seu CEP"
             value="{{ user.cep }}"
             onkeydown="Mask.apply(this, 'cep')"
+            onblur="Validate.apply(this, 'isCep')"
         >
     </div>
 </div>

@@ -34,12 +34,13 @@ module.exports = {
         if(fieldsMessage[0] != null){
             return res.send({ alert: fieldsMessage })
         }
-
-        console.log(req.files)
+        
 
         if(req.files.length == 0){
             return res.send({ message: 'Please, send at least one image ' })
         }
+
+        req.body.user_id = req.session.userId
 
         let result = await Product.create(req.body)
         const productId = result.rows[0].id
@@ -143,6 +144,20 @@ module.exports = {
 
         return res.redirect(`/products/${req.body.id}`)
 
+
+    },
+    async destroy(req,res){
+        const { id } = req.body
+
+        const product = await Product.find(id)
+
+        if(!product) return res.redirect('/', {
+            error: "Produto não encontrado"
+        })
+
+        await Product.delete(id)
+
+        return res.redirect('/')
 
     }
 }

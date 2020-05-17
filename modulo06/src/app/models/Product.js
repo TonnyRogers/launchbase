@@ -1,4 +1,5 @@
 const db = require('../../config/db')
+const File = require('./File')
 
 module.exports = {
     all(){
@@ -26,7 +27,7 @@ module.exports = {
 
         const values = [
             data.category_id,
-            data.user_id || 1,
+            data.user_id,
             data.name,
             data.description,
             data.old_price || data.price,
@@ -45,19 +46,17 @@ module.exports = {
         const query = `
             UPDATE products SET 
                 category_id =($1),
-                user_id =($2),
-                name =($3),
-                description =($4),
-                old_price =($5),
-                price =($6),
-                quantity =($7),
-                status =($8)
-            WHERE id = $9
+                name =($2),
+                description =($3),
+                old_price =($4),
+                price =($5),
+                quantity =($6),
+                status =($7)
+            WHERE id = $8
         `
 
         const values = [
             data.category_id,
-            data.user_id || 1,
             data.name,
             data.description,
             data.old_price,
@@ -70,7 +69,13 @@ module.exports = {
 
         return db.query(query,values)
     },
-    delete(id) {
+    async delete(id) {
+
+        const files = await File.all(id)
+        
+        const filePromise = files.map( file => File.delete(file.id) )
+        await Promise.all(filePromise)
+
         return db.query(`DELETE FROM products WHERE id = $1`,[id])
     },
     files(id) {
@@ -103,5 +108,8 @@ module.exports = {
         `
 
         return db.query(query)
+    },
+    allFromUser(userId){
+        return db.query(`SELECT * FROM products WHERE user_id = $1`, [userId])    
     }
 }

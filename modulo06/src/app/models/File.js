@@ -31,5 +31,12 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
+    },
+    async all(productId){
+        const results = await db.query('SELECT * FROM files WHERE product_id = $1',[productId])
+
+        const files = results.rows
+
+        return files
     }
 }
