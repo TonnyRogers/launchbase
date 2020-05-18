@@ -1,0 +1,82 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Detalhes do Produto</title>
+{% endblock head %}
+
+{% block content %}
+
+    <section class="product-single container">
+        <div class="gallery">
+            <div class="highlight" >
+                {% if not product.files[0] %}
+                    <img src="https://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="photo">
+                {% else %}
+                    <img 
+                        src="{{ product.files[0].src }}" 
+                        alt="{{ product.files[0].name }}"
+                        onclick="Lightbox.open()"
+                    >
+                {% endif %}
+
+                <div class="lightbox-target" >
+                    <img src="{{product.files[0].src}}" alt="{{product.files[0].name}}">
+                    <a 
+                        href="#" 
+                        onclick="Lightbox.close()" 
+                        class="lightbox-close"
+                    >
+                        <i class="material-icons">close</i>
+                    </a>
+                </div>
+            </div>
+            <div class="gallery-preview">
+                {% for image in product.files %}
+                    <img 
+                        src="{{ image.src }}" 
+                        alt="{{ image.name }}"
+                        {% if loop.index0 == 0 %}
+                            class="active"
+                        {% endif %}
+                        onclick="ImageGallery.setImage(event)"
+                    >
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="info">
+            <h1>{{ product.name }}</h1>
+
+            <div class="published">
+                Publicado em {{ product.published.day }} ás {{ product.published.hour }}
+            </div>
+
+            <div class="description">
+                {{ product.description }}
+            </div>
+
+            <div class="price-buy">
+                <div class="price">
+                    {{ product.formattedPrice }}
+
+                    {% if product.formattedPrice != product.formattedOldPrice %}
+                        <span class="old">{{ product.formattedOldPrice }}</span>
+                    {% endif %}
+                    
+                </div>
+                <div class="buy">
+                    {% if product.status == 0 %}
+                        <p class="unavaliable">Indisponivel</p>
+                    {% elseif product.quantity == 0 %}
+                        <p class="unavaliable">Fora de estoque</p>
+                    {% else %}
+                        <button class="button" type="button">Comprar</button>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
