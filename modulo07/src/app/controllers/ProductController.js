@@ -23,34 +23,6 @@ module.exports = {
     async store(req,res){ 
 
         try {
-            const categories = await Category.findAll()
-
-            const keys = Object.keys(req.body)
-            let fieldsMessage = []
-
-            for(key of keys){
-
-                if(req.body[key] == "" ){
-                    fieldsMessage.push([`Please, fill the ${key} field`])
-                }
-            }
-
-            if(fieldsMessage[0] != null){
-                return res.render('products/create', { 
-                    error: 'Preencha todos os campos',
-                    product: req.body,
-                    categories
-                 })
-            }
-            
-
-            if(req.files.length == 0){
-                return res.render('products/create', { 
-                    error: 'Envie no minimo 1 imagem',
-                    product: req.body,
-                    categories
-                })
-            }
 
             req.body.user_id = req.session.userId
 
@@ -120,16 +92,6 @@ module.exports = {
     },
     async update(req,res){
         try {
-            const keys = Object.keys(req.body)
-
-            let fieldsMessage = []
-
-            for(key of keys){
-
-                if(req.body[key] == "" && key != 'removed_files'){
-                    fieldsMessage.push([`Please, fill the ${key} field`])
-                }
-            }
 
             if(req.files.length != 0){
                 const newFilePromisse = req.files.map( file => File.create({ name: file.filename, path: file.path, product_id: req.body.id }))
@@ -143,10 +105,6 @@ module.exports = {
     
                 const removedFilesPromise = removedFiles.map( id => File.delete(id) )
                 await Promise.all(removedFilesPromise)
-            }
-
-            if(fieldsMessage[0] != null){
-                return res.send({ alert: fieldsMessage })
             }
 
             let product = await Product.find(req.body.id)

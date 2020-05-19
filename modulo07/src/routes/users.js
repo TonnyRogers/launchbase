@@ -23,4 +23,6 @@ routes.get('/', onlyUsers , UserValidator.show , UserController.show)
 routes.put('/', UserValidator.update, UserController.update)
 routes.delete('/', UserController.destroy)
 
+routes.get('/ads', UserController.ads)
+
 module.exports = routes; 

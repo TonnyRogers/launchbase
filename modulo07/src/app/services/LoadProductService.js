@@ -31,9 +31,11 @@ async function format(product){
     return product
 }
 
+
+
 const LoadService = {
     load(service, filter){
-        this.filter
+        this.filter = filter
         return this[service]()
     },
     async product(){
@@ -61,3 +63,7 @@ const LoadService = {
 }
 
 module.exports = LoadService
+
+function newFunction() {
+    console.log()
+}

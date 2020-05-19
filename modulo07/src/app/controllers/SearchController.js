@@ -1,5 +1,3 @@
-
-
 const Product = require('../models/Product')
 
 const LoadProductService = require('../services/LoadProductService')
@@ -7,26 +5,20 @@ const LoadProductService = require('../services/LoadProductService')
 module.exports = {
     async index(req,res) {
         try {
-            let params = {}
+            let { filter, category } = req.query
 
-            const { filter, category } = req.query
+            // params.filter = filter
 
-            if(!filter) return res.redirect('/')
+            if(!filter || filter.toLowerCase() == 'toda a loja' ) filter = null 
 
-            params.filter = filter
-
-            if(category){
-                params.category = category
-            }
-
-            let products = await Product.search(params)
+            let products = await Product.search({filter,category})
             
             const productPromisse = products.map(LoadProductService.format)
 
             products = await Promise.all(productPromisse)
 
             const search = {
-                term: req.query.filter,
+                term: filter || 'Toda a loja',
                 total: products.length
             }
             

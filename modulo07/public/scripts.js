@@ -251,5 +251,23 @@ const Validate = {
             error,
             value
         }
+    },
+    allFields(event) {
+         const items = document.querySelectorAll('.item input, .item selector, .item textarea')
+
+         for(item in items){
+             if(item == ''){
+
+                
+                const message = document.createElement('vid')
+                message.classList.add('message')
+                message.classList.add('error')
+                message.style.position = 'fixed'
+                message.innerHTML = 'Preencha todos os campos.'
+                document.querySelector('body').append(message)
+
+                event.preventDefault()
+             }
+         }
     }
 }

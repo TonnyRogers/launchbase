@@ -15,6 +15,7 @@ function find(filters, table) {
             })
         }
 
+        console.log(query)
         return db.query(query)
 }
 
