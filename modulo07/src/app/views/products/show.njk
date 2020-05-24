@@ -1,13 +1,14 @@
 {% extends "layout.njk" %}
 
+{% import "parts/card.njk" as cards %}
+
 {% block head %}
     <title>Detalhes do Produto</title>
 {% endblock head %}
 
 {% block content %}
-
-    <section class="product-single container">
-        <div class="gallery">
+    {% call cards.render('','product-single container')%}
+        <div class="gallery">            
             <div class="highlight" >
                 {% if not product.files[0] %}
                     <img src="https://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="photo">
@@ -30,6 +31,7 @@
                     </a>
                 </div>
             </div>
+
             <div class="gallery-preview">
                 {% for image in product.files %}
                     <img 
@@ -42,7 +44,6 @@
                     >
                 {% endfor %}
             </div>
-
         </div>
 
         <div class="info">
@@ -65,18 +66,25 @@
                     {% endif %}
                     
                 </div>
-                <div class="buy">
-                    {% if product.status == 0 %}
-                        <p class="unavaliable">Indisponivel</p>
-                    {% elseif product.quantity == 0 %}
-                        <p class="unavaliable">Fora de estoque</p>
-                    {% else %}
-                        <button class="button" type="button">Comprar</button>
-                    {% endif %}
-                    
-                </div>
+                {% if (session.userId) and (product.user_id == session.userId)  %}
+                    <p class="unavaliable">Você é o vendedor</p>
+                {% else %}
+                    <div class="buy">
+                        {% if product.status == 0 %}
+                            <p class="unavaliable">Indisponivel</p>
+                        {% elseif product.quantity == 0 %}
+                            <p class="unavaliable">Fora de estoque</p>
+                        {% else %}
+                            <form action="/users/order" method="POST">
+                                <input type="hidden" name="id" value="{{product.id}}">
+                                <button class="button" >Comprar</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
         </div>
-    </section>
+
+    {% endcall %}
 
 {% endblock content %}
