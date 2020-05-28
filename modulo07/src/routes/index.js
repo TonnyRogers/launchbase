@@ -5,11 +5,13 @@ const HomeController = require('../app/controllers/HomeController')
 
 const users = require('./users')
 const products = require('./products')
+const cart = require('./cart')
 
 routes.get('/', HomeController.index)
 
 routes.use('/users', users)
 routes.use('/products', products)
+routes.use('/cart', cart)
 
 routes.get('/ads/create', function(req,res){
     return res.redirect('/products/create');
