@@ -59,6 +59,10 @@ const LoadService = {
             
         }
     },
+    async productWithDeleted() {
+        let product = await Product.findOneWithDeleted(this.filter)
+        return format(product)
+    },
     format,
 }
 
