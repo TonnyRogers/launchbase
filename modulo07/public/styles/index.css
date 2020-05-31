@@ -117,23 +117,24 @@ footer {
 }
 
 /* Primary Menu */
-nav.primary ul {
+nav.primary > ul {
     display: flex;
     justify-content: space-between;
 }
 
-nav.primary ul li a {
+nav.primary > ul > li > a {
     display: flex;
     align-items: center;
     color: #fff;
     transition: 200ms;
+    height: 48px;
 }
 
-nav.primary ul li a:hover {
+nav.primary > ul > li > a:hover {
     color: var(--primary-color);
 }
 
-nav.primary ul li a i{
+nav.primary > ul > li > a > i{
     margin-right: 8px;
 }
 

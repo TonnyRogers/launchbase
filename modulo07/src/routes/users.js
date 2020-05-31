@@ -26,6 +26,4 @@ routes.delete('/', UserController.destroy)
 
 routes.get('/ads', UserController.ads)
 
-routes.post('/order',onlyUsers, OrderController.store)
-
 module.exports = routes; 
